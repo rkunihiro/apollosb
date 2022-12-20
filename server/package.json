@@ -1,0 +1,17 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {},
+    "dependencies": {
+        "@apollo/server": "^4.3.0"
+    },
+    "scripts": {
+        "dev": "ts-node-dev src/main.ts",
+        "build": "ts-node build.ts",
+        "start": "node dist/main.js"
+    }
+}

@@ -3,13 +3,10 @@ import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries"
 import { fetch } from "cross-fetch";
 import { sha256 } from "crypto-hash";
 
-const persistedQueryLink = createPersistedQueryLink({
-    sha256,
-    useGETForHashedQueries: true,
-});
+const uri = "http://localhost:3000/graphql";
 
 const httpLink = new HttpLink({
-    uri: "http://localhost:3000/graphql",
+    uri,
     // fetch,
     fetch: (input: RequestInfo | URL, init?: RequestInit) => {
         // dump raw fetch args
@@ -18,7 +15,13 @@ const httpLink = new HttpLink({
     },
 });
 
-export const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: persistedQueryLink.concat(httpLink),
+const persistedQueryLink = createPersistedQueryLink({
+    sha256,
+    useGETForHashedQueries: true,
 });
+
+const link = persistedQueryLink.concat(httpLink);
+
+const cache = new InMemoryCache();
+
+export const client = new ApolloClient({ cache, link });

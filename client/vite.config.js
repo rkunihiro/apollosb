@@ -18,10 +18,24 @@ const config = defineConfig({
             "chrome96",
             "safari15",
         ],
+        define: {
+            "process.env.NODE_ENV": '"production"',
+        },
+    },
+    server: {
+        port: 8080,
+        strictPort: true,
+        open: true,
     },
     build: {
         minify: "esbuild",
         // minify: false,
+        sourcemap: true,
+        copyPublicDir: true,
+    },
+    preview: {
+        port: 8080,
+        strictPort: true,
     },
 });
 

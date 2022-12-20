@@ -1,9 +1,9 @@
-/.idea/
-/.vite/
-/.vscode/
+.idea/
+.vite/
+.vscode/
 
-/dist/
-/node_modules/
+dist/
+node_modules/
 
 *.d.ts
 *.map

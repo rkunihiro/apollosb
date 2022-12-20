@@ -5,9 +5,23 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { gql } from "graphql-tag";
 
 const typeDefs = gql`
+    enum CacheControlScope {
+        PUBLIC
+        PRIVATE
+    }
+
+    directive @cacheControl(
+        maxAge: Int
+        scope: CacheControlScope
+        inheritMaxAge: Boolean
+    ) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
     type Query {
         "Message"
         message: String
+
+        "Current date time"
+        now: String @cacheControl(maxAge: 0)
     }
 
     schema {
@@ -19,6 +33,9 @@ const resolvers = {
     Query: {
         message() {
             return "Hello,World!";
+        },
+        now() {
+            return new Date().toISOString();
         },
     },
 };

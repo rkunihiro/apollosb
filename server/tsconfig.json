@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json.schemastore.org/tsconfig",
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "lib": ["es2021"],
+        "jsx": "preserve",
+        "rootDir": "./src"
+    },
+    "include": ["./src"]
+}

@@ -1,0 +1,48 @@
+$background-color: #fff;
+$text-color: #000;
+$link-color: #39f;
+$font-size: 16px;
+$line-heigt: 20px;
+$font-family: "Noto Sans CJK JP", "Hiragino Sans", "Droid Sans", sans-serif;
+
+* {
+    appearance: none;
+    background: none transparent;
+    border: 0 solid #000;
+    box-sizing: border-box;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    text-decoration: inherit;
+    user-select: none;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: $background-color;
+    color: $text-color;
+    font: normal $font-size $font-family;
+    line-height: $line-heigt;
+    text-decoration: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: $link-color;
+    text-decoration: underline;
+}
+
+#container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
