@@ -1,14 +1,7 @@
-import { useQuery } from "@apollo/client";
-import { gql } from "graphql-tag";
-
-const getMessageQuery = gql`
-    query getMessage {
-        message
-    }
-`;
+import { useGetMessageQuery } from "../queries";
 
 export function Message(): JSX.Element {
-    const { data, loading } = useQuery<{ message?: string }>(getMessageQuery);
+    const { data, loading } = useGetMessageQuery();
     if (loading) {
         return <div>Loading...</div>;
     }

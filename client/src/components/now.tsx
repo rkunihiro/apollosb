@@ -1,14 +1,7 @@
-import { useQuery } from "@apollo/client";
-import { gql } from "graphql-tag";
-
-const getCurrentDateQuery = gql`
-    query getCurrentDate {
-        now
-    }
-`;
+import { useGetCurrentDateQuery } from "../queries";
 
 export function Now(): JSX.Element | null {
-    const { data, loading } = useQuery<{ now: string }>(getCurrentDateQuery);
+    const { data, loading } = useGetCurrentDateQuery();
     if (loading) {
         return <div>Loading...</div>;
     }

@@ -6,5 +6,5 @@
         "jsx": "preserve",
         "rootDir": "./src"
     },
-    "include": ["./src"]
+    "include": ["./src", "../client/src/env.d.ts", "../client/src/env.d.ts"]
 }

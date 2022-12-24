@@ -3,7 +3,7 @@ import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries"
 import { fetch } from "cross-fetch";
 import { sha256 } from "crypto-hash";
 
-const uri = "http://localhost:3000/graphql";
+const uri = import.meta.env.VITE_ENDPOINT_URL;
 
 const httpLink = new HttpLink({
     uri,
@@ -25,3 +25,5 @@ const link = persistedQueryLink.concat(httpLink);
 const cache = new InMemoryCache();
 
 export const client = new ApolloClient({ cache, link });
+
+export default client;
