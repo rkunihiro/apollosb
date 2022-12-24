@@ -11,6 +11,7 @@ const config = defineConfig({
         //
         pluginReact(),
     ],
+    // esbuild: false,
     esbuild: {
         platform: "browser",
         target: [
@@ -24,11 +25,13 @@ const config = defineConfig({
     },
     server: {
         port: 8080,
-        strictPort: true,
-        open: true,
+        host: "0.0.0.0",
+        // strictPort: true,
+        // open: true,
     },
     build: {
         minify: "esbuild",
+        // minify: "terser",
         // minify: false,
         sourcemap: true,
         copyPublicDir: true,

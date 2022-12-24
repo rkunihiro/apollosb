@@ -1,0 +1,73 @@
+x-common:
+  environment: &common-environment
+    LANG: C.UTF-8
+    TZ: UTC
+
+services:
+  redis:
+    image: redis:7.0.7-alpine3.17
+    container_name: apollosb-container-node-redis
+    environment: *common-environment
+    networks:
+      - default
+    ports:
+      - 6379:6379
+
+  node-server:
+    image: node:18.12.1-bullseye-slim
+    container_name: apollosb-container-node-server
+    depends_on:
+      - redis
+    environment:
+      <<: *common-environment
+      NODE_ENV: development
+      REDIS_URL: redis://redis:6379/
+    networks:
+      - default
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app:rw
+    working_dir: /app
+    command: ['npm', 'run', 'server']
+    init: true
+    # tty: true
+
+  node-client:
+    image: node:18.12.1-bullseye-slim
+    container_name: apollosb-container-node-client
+    environment:
+      <<: *common-environment
+      NODE_ENV: development
+      VITE_ENDPOINT_URL: 'http://localhost/'
+    networks:
+      - default
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app:rw
+    working_dir: /app
+    command: ['npm', 'run', 'client']
+    init: true
+    # tty: true
+
+  proxy:
+    image: nginx:1.23.3-alpine-slim
+    container_name: apollo-container-proxy
+    depends_on:
+      - node-server
+      - node-client
+    environment:
+      LANG: C.UTF-8
+      TZ: UTC
+    networks:
+      - default
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./.devcontainer/proxy/conf:/etc/nginx/conf.d:ro
+
+networks:
+  default:
+    name: apollosb-network-default
