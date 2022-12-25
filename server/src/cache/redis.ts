@@ -47,5 +47,3 @@ export class RedisKeyValueCache implements KeyValueCache {
         }
     }
 }
-
-export const cache = new RedisKeyValueCache(process.env["REDIS_URL"] ?? "redis://localhost:6379");
